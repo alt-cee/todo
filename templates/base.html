@@ -16,19 +16,25 @@
     <h1 style="margin-top: 50px" class="ui center aligned header">TODO app</h1>
         
     <form class="ui form" action="/add" method="POST">
-        <label for="title"></label><input type="text" id="title" name="title" placeholder="What I need TODO"><button class="ui blue button" type="submit">Add</button>
+        <label for="title"></label><input type="text" id="title" name="title" placeholder="What I need TODO">
+        <button class="fluid ui blue button" type="submit">Add</button>
     </form>
 
+    <div class="ui horizontal divider">
+        Things I need TODO
+    </div>
+
+    
     {% for todo in todo_list %}
-    <div class="ui segment">
+    <div class="ui grey segment">
         <p class="ui big header"> [{{todo.id}}] {{todo.title}} </p>
-        {% if todo.complete == False %}
-            <span class="ui grey label">Not Complete</span>
-        {% else %}
-            <span class="ui green label">Complete</span>
-        {% endif %}
         <a class="ui blue button" href="/update/{{ todo.id }}">Update</a>
         <a class="ui red button" href="/delete/{{ todo.id }}">Delete</a>
+        {% if todo.complete == False %}
+            <a class="ui red right tag label">Not Complete</a>
+        {% else %}
+            <a class="ui green right tag label">Complete</a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
