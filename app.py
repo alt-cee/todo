@@ -13,12 +13,16 @@ class todo(db.Model):
 
 @app.route("/")
 def index():
-    print(todo.query.all())
-    return render_template("base.html")
+    todo_list = todo.query.all()
+    return render_template("base.html", todo_list=todo_list)
+
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all() 
-        
+        new_todo = todo(title = "Wash the car", complete = False)
+        db.session.add(new_todo)
+        db.session.commit()
+
     app.run(debug=True)
     

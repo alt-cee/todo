@@ -8,7 +8,22 @@
 </head>
 <body>
 
-    <h1>Hello World!</h1>
+    <h1>TODO app</h1>
+        
+    <form>
+        <label for="title">TODO</label><input type="text" id="title" name="title" placeholder="What I need TODO"><button type="submit">Add</button>
+    </form>
+
+    {% for todo in todo_list %}
+        <p> {{todo.id}} | {{todo.title}} </p>
+        {% if todo.complete == False %}
+            <span>Not Complete</span>
+        {% else %}
+            <span>Complete</span>
+        {% endif %}
+        <a href="/">Update</a>
+        <a href="/">Delete</a>
+    {% endfor %}
 
 </body>
 </html>
