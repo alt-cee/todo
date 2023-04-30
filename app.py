@@ -31,6 +31,17 @@ def add():
     return redirect(url_for("index"))
 
 
+@app.route("/update/<int:todo_id>")
+def update(todo_id):
+    """
+    Update a TODO between Complete <--> Not Complete
+    """
+    update_todo = todo.query.filter_by(id=todo_id).first()
+    update_todo.complete = not update_todo.complete
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all() 
