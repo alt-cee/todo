@@ -19,6 +19,14 @@ def index():
     todo_list = todo.query.all()
     return render_template("base.html", todo_list=todo_list)
 
+@app.route("/incomplete")
+def incomplete():
+    """
+    Page that displays incomplete TODOs.
+    """
+    todo_list = todo.query.filter_by(complete=False).all()
+    return render_template("base.html", todo_list=todo_list)
+
 @app.route("/add", methods=["POST"])
 def add():
     """
